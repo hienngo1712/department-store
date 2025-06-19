@@ -7,6 +7,8 @@ const search = ref("");
 const page = ref(1);
 const limit = 8;
 const total = ref(0);
+const totalPage = ref(0);
+
 const fetchProducts = async () => {
   const skip = (page.value - 1) * limit;
   try {
@@ -15,8 +17,11 @@ const fetchProducts = async () => {
       ? `https://dummyjson.com/products/search?q=${query}&limit=${limit}&skip=${skip}`
       : `https://dummyjson.com/products?limit=${limit}&skip=${skip}`;
     const res = await axios.get(url);
+    console.log(res.data);
+
     products.value = res.data.products;
-    total.value = res.data.total;
+    total.value = res.data?.total;
+    totalPage.value = Math.ceil(total.value / limit);
   } catch (error) {
     console.error("Lỗi khi lấy products:", error);
   }
@@ -79,7 +84,7 @@ const prevPage = () => {
       >
         Prev
       </button>
-      <span class="px-4 py-2 font-semibold">{{ page }}</span>
+      <span class="px-4 py-2 font-semibold">{{ page }} / {{ totalPage }}</span>
       <button
         @click="nextPage"
         :disabled="page * limit >= total"
