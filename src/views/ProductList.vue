@@ -5,8 +5,9 @@ import axios from "axios";
 const products = ref([]);
 const search = ref("");
 const page = ref(1);
-const limit = 8;
+const limit = 12;
 const total = ref(0);
+const totalPage = ref(0);
 const fetchProducts = async () => {
   const skip = (page.value - 1) * limit;
   try {
@@ -16,7 +17,8 @@ const fetchProducts = async () => {
       : `https://dummyjson.com/products?limit=${limit}&skip=${skip}`;
     const res = await axios.get(url);
     products.value = res.data.products;
-    total.value = res.data.total;
+    total.value = res.data?.total;
+    totalPage.value = Math.ceil(total.value / limit);
   } catch (error) {
     console.error("Lỗi khi lấy products:", error);
   }
@@ -50,7 +52,7 @@ const prevPage = () => {
         class="border border-gray-400 rounded p-2 w-1/2 transition-transform duration-300 hover:scale-105 mb-6"
       />
     </div>
-    <div v-if="products.length" class="grid grid-cols-4 gap-6">
+    <div v-if="products.length" class="grid grid-cols-6 gap-6">
       <router-link
         v-for="product in products"
         :key="product.id"
@@ -60,12 +62,12 @@ const prevPage = () => {
         <img
           :src="product.thumbnail"
           alt=""
-          class="h-32 w-full object-cover mb-4"
+          class="h-40 w-full object-cover mb-4"
         />
-        <h2 class="text-xl font-semibold text-center mb-4">
+        <h2 class="text-xl font-semibold text-center mb-4 line-clamp-1">
           {{ product.title }}
         </h2>
-        <p class="text-sm text-center mb-2">
+        <p class="text-sm text-center mb-2 line-clamp-2">
           {{ product.description }}
         </p>
         <p class="text-lg font-bold text-center">${{ product.price }}</p>
@@ -83,7 +85,7 @@ const prevPage = () => {
       >
         Prev
       </button>
-      <span class="px-4 py-2 font-semibold">{{ page }}</span>
+      <span class="px-4 py-2 font-semibold">{{ page }} / {{ totalPage }}</span>
       <button
         @click="nextPage"
         :disabled="page * limit >= total"

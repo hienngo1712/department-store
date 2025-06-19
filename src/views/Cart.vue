@@ -37,20 +37,20 @@ function checkout() {
       <table class="w-full text-left">
         <thead>
           <tr>
-            <th class="px-4 py-2">Sản phẩm</th>
-            <th class="px-4 py-2">Giá</th>
-            <th class="px-4 py-2">Số lượng</th>
-            <th class="px-4 py-2">Tổng</th>
-            <th class="px-4 py-2">Hành động</th>
+            <th class="px-4 py-2 border">Sản phẩm</th>
+            <th class="px-4 py-2 border">Giá</th>
+            <th class="px-4 py-2 border">Số lượng</th>
+            <th class="px-4 py-2 border">Tổng</th>
+            <th class="px-4 py-2 border">Hành động</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(item, index) in cart" :key="index">
-            <td class="px-4 py-2">{{ item.title }}</td>
-            <td class="px-4 py-2">${{ item.price }}</td>
-            <td class="px-4 py-2">{{ item.quantity }}</td>
-            <td class="px-4 py-2">${{ item.price * item.quantity }}</td>
-            <td class="px-4 py-2">
+            <td class="px-4 py-2 border">{{ item.title }}</td>
+            <td class="px-4 py-2 border">${{ item.price }}</td>
+            <td class="px-4 py-2 border">{{ item.quantity }}</td>
+            <td class="px-4 py-2 border">${{ item.price * item.quantity }}</td>
+            <td class="px-4 py-2 border">
               <button
                 @click="removeFromCart(index)"
                 class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"

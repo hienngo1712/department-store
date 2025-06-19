@@ -33,7 +33,7 @@ const routes = [
         path: "/admin",
         name: "DashBoard",
         component: DashBoard,
-        meta:{requiresAuth: true}
+        meta: {requiresAuth: true}
     }
 ];
 const router = createRouter({
