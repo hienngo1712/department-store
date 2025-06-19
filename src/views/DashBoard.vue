@@ -27,6 +27,7 @@ onMounted(async () => {
 </script>
 <template>
   <div class="p-8 max-w-6xl mx-auto">
+    <aside class="w-64 bg-white"></aside>
     <h1 class="text-3xl text-center font-bold uppercase mb-4">
       Admin Dashboard
     </h1>

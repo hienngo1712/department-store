@@ -5,7 +5,7 @@ import axios from "axios";
 const products = ref([]);
 const search = ref("");
 const page = ref(1);
-const limit = 8;
+const limit = 12;
 const total = ref(0);
 const totalPage = ref(0);
 
@@ -62,8 +62,12 @@ const prevPage = () => {
         :to="`products/${product.id}`"
         class="border p-4 rounded-4xl shadow transition transform duration-300 hover:scale-105 hover:bg-gray-400 hover:text-white"
       >
-        <img :src="product.thumbnail" alt="" class="w-full object-cover mb-4" />
-        <h2 class="text-xl font-semibold text-center mb-4">
+        <img
+          :src="product.thumbnail"
+          alt=""
+          class="h-40 w-full object-cover mb-4"
+        />
+        <h2 class="text-xl font-semibold text-center mb-4 line-clamp-1">
           {{ product.title }}
         </h2>
         <p class="text-sm text-center mb-2 line-clamp-2">
