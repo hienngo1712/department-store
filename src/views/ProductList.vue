@@ -8,6 +8,7 @@ const page = ref(1);
 const limit = 12;
 const total = ref(0);
 const totalPage = ref(0);
+
 const fetchProducts = async () => {
   const skip = (page.value - 1) * limit;
   try {
@@ -16,6 +17,8 @@ const fetchProducts = async () => {
       ? `https://dummyjson.com/products/search?q=${query}&limit=${limit}&skip=${skip}`
       : `https://dummyjson.com/products?limit=${limit}&skip=${skip}`;
     const res = await axios.get(url);
+    console.log(res.data);
+
     products.value = res.data.products;
     total.value = res.data?.total;
     totalPage.value = Math.ceil(total.value / limit);
@@ -52,7 +55,7 @@ const prevPage = () => {
         class="border border-gray-400 rounded p-2 w-1/2 transition-transform duration-300 hover:scale-105 mb-6"
       />
     </div>
-    <div v-if="products.length" class="grid grid-cols-6 gap-6">
+    <div v-if="products.length" class="grid grid-cols-4 gap-6 gap-y-10">
       <router-link
         v-for="product in products"
         :key="product.id"
