@@ -16,6 +16,7 @@ const logout = () => {
     <div class="max-w-6xl mx-auto flex justify-between items-center">
       <router-link to="/" class="text-xl font-bold">My Shop</router-link>
       <div class="space-x-4">
+        <router-link to="/post" class="hover:underline">Posts</router-link>
         <router-link to="/" class="hover:underline">Products</router-link>
         <router-link to="/cart" class="hover:underline">Cart</router-link>
         <router-link to="/admin" class="hover:underline">Admin</router-link>
