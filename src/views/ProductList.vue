@@ -50,22 +50,18 @@ const prevPage = () => {
         class="border border-gray-400 rounded p-2 w-1/2 transition-transform duration-300 hover:scale-105 mb-6"
       />
     </div>
-    <div v-if="products.length" class="grid grid-cols-4 gap-6">
+    <div v-if="products.length" class="grid grid-cols-4 gap-6 gap-y-10">
       <router-link
         v-for="product in products"
         :key="product.id"
         :to="`products/${product.id}`"
         class="border p-4 rounded-4xl shadow transition transform duration-300 hover:scale-105 hover:bg-gray-400 hover:text-white"
       >
-        <img
-          :src="product.thumbnail"
-          alt=""
-          class="h-32 w-full object-cover mb-4"
-        />
+        <img :src="product.thumbnail" alt="" class="w-full object-cover mb-4" />
         <h2 class="text-xl font-semibold text-center mb-4">
           {{ product.title }}
         </h2>
-        <p class="text-sm text-center mb-2">
+        <p class="text-sm text-center mb-2 line-clamp-2">
           {{ product.description }}
         </p>
         <p class="text-lg font-bold text-center">${{ product.price }}</p>
