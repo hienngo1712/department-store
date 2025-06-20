@@ -1,0 +1,31 @@
+{
+  "cart": [],
+  "order": [
+    {
+      "id": "4510",
+      "username": "avat",
+      "products": [
+        {
+          "id": "5",
+          "title": "Red Nail Polish",
+          "price": 8.99,
+          "discountPercentage": 11.44,
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "187f",
+      "username": "avat",
+      "products": [
+        {
+          "id": "3",
+          "title": "Powder Canister",
+          "price": 14.99,
+          "discountPercentage": 9.84,
+          "quantity": 1
+        }
+      ]
+    }
+  ]
+}

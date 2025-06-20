@@ -19,6 +19,7 @@ const logout = () => {
         <router-link to="/post" class="hover:underline">Posts</router-link>
         <router-link to="/" class="hover:underline">Products</router-link>
         <router-link to="/cart" class="hover:underline">Cart</router-link>
+        <router-link to="/order" class="hover:underline">Order</router-link>
         <router-link to="/admin" class="hover:underline">Admin</router-link>
         <button @click="logout" class="hover:underline">Logout</button>
       </div>
