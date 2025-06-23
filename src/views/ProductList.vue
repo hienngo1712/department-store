@@ -39,7 +39,7 @@ const fetchProducts = async () => {
 
     products.value = res.data.products;
     total.value = res.data?.total;
-    totalPage.value = Math.ceil(total.value / limit);
+    totalPage.value = Math.ceil(total.value / limit.value);
   } catch (error) {
     console.error("Lỗi khi lấy products:", error);
   }
@@ -48,7 +48,7 @@ onMounted(() => {
   fetchProducts();
 });
 const nextPage = () => {
-  if (page.value * limit < total.value) {
+  if (page.value * limit.value < total.value) {
     page.value++;
     fetchProducts();
   }
