@@ -16,16 +16,51 @@ onMounted(async () => {
   }
 });
 
-const addToCart = () => {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const index = cart.findIndex((item) => item.id === product.value.id);
-  if (index !== -1) {
-    cart[index].quantity++; // Tăng số lượng nếu sản phẩm đã có trong giỏ
-  } else {
-    cart.push({ ...product.value, quantity: 1 }); // Thêm sản phẩm mới vào giỏ
+const addToCart = async (item) => {
+  // const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  // const index = cart.findIndex((item) => item.id === product.value.id);
+  // if (index !== -1) {
+  //   cart[index].quantity++; // Tăng số lượng nếu sản phẩm đã có trong giỏ
+  // } else {
+  //   cart.push({ ...product.value, quantity: 1 }); // Thêm sản phẩm mới vào giỏ
+  // }
+  // localStorage.setItem("cart", JSON.stringify(cart));
+  // alert("Sản phẩm đã được thêm vào giỏ hàng!");
+  try {
+    // Bảo đảm id là số nếu bạn dùng số làm id (nếu là string thì bỏ dòng này)
+    const id = String(item.id);
+
+    // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng hay chưa dựa theo id
+    const res = await axios.get(`http://localhost:3000/cart?id=${id}`);
+
+    if (res.data.length > 0) {
+      // Nếu sản phẩm đã có → cập nhật số lượng bằng PATCH
+      const existingItem = res.data[0];
+      const newQuantity = (existingItem.quantity || 1) + 1;
+
+      await axios.patch(`http://localhost:3000/cart/${existingItem.id}`, {
+        quantity: newQuantity,
+      });
+
+      console.log("Đã cập nhật số lượng sản phẩm:", newQuantity);
+    } else {
+      // Nếu sản phẩm chưa có → thêm mới với quantity = 1
+      const newItem = {
+        id: id,
+        title: item.title,
+        price: item.price,
+        discountPercentage: item.discountPercentage,
+        quantity: 1,
+      };
+
+      await axios.post("http://localhost:3000/cart", newItem);
+
+      console.log("Đã thêm sản phẩm mới vào giỏ hàng.");
+    }
+  } catch (error) {
+    console.error("Lỗi khi thêm/cập nhật giỏ hàng:", error);
+    alert("Thêm vào giỏ hàng thất bại");
   }
-  localStorage.setItem("cart", JSON.stringify(cart));
-  alert("Sản phẩm đã được thêm vào giỏ hàng!");
 };
 </script>
 <template>
@@ -93,7 +128,7 @@ const addToCart = () => {
           </div>
           <div class="flex justify-around">
             <button
-              @click="addToCart"
+              @click="addToCart(product)"
               class="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition duration-200 shadow-lg transform hover:scale-105"
             >
               Thêm vào giỏ hàng
