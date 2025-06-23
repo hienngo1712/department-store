@@ -52,8 +52,8 @@ const addToCart = () => {
       <div>
         <h1 class="text-3xl text-center font-bold mb-2">{{ product.title }}</h1>
         <p class="text-gray-600 mb-4">{{ product.description }}</p>
-        <div class="grid grid-cols-2 gap-4 text-sm">
-          <div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="space-y-1">
             <p><strong>Brand:</strong> {{ product.brand }}</p>
             <p><strong>Category:</strong> {{ product.category }}</p>
             <p><strong>SKU:</strong> {{ product.sku }}</p>
@@ -62,7 +62,7 @@ const addToCart = () => {
             <p><strong>Rating:</strong> {{ product.rating }} / 5</p>
             <p><strong>Stock:</strong> {{ product.stock }}</p>
           </div>
-          <div>
+          <div class="space-y-1">
             <p><strong>Dimension:</strong></p>
             <ul class="list-disc ml-4">
               <li>Width: {{ product.dimensions.width }}</li>
